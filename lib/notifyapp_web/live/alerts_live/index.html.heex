@@ -1,6 +1,9 @@
-<div class="ml-96">
-<button phx-click="check"> check </button>
-<button phx-click="msg"> msg </button>
+<div>
+<button class="border border-2 border-gray-200 rounded-md px-4 py-2" phx-click="check"> IO.inspect current assigns </button>
+</div>
+
+<div>
+<button class="border border-2 border-gray-200 rounded-md px-4 py-2" phx-click="msg"> Create a message (without any redirect or patch) </button>
 </div>
 
 <div class="ml-auto fixed w-fit max-h-screen overflow-y-scroll inset-x-0 bottom-0 z-40 ">
@@ -77,7 +80,7 @@
                       <div class="flex w-full ">
                         <div class=" w-0 flex-1 ">
                           <p class="text-sm font-medium text-gray-900">
-                            <%= flash_message.msg %><%= "##{flash_message.id}" %>
+                            <%= flash_message.msg %>
                           </p>
                           <p>
                             <span x-text="count"></span>

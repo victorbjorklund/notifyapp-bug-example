@@ -7,9 +7,7 @@ defmodule NotifyappWeb.AlertsLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-    IO.inspect("Moooounting")
 
-    # PubSub.subscribe(Awesometemplate.PubSub, "alerts")
     subscribe_to_alarms_topic(session)
 
 
@@ -47,6 +45,7 @@ defmodule NotifyappWeb.AlertsLive.Index do
     {:noreply, socket}
   end
 
+
   @impl true
   def handle_info({:toast, %{id: id, msg: msg, expire: expire, time: time, type: type}}, socket) do
 
@@ -70,43 +69,18 @@ defmodule NotifyappWeb.AlertsLive.Index do
     {:noreply, assign(socket, flash_messages: messages)}
   end
 
-  # Enum.map(users, fn
-  #   %User{id: 2} = user -> %User{user | attempts: 99}
-  #   user -> user
-  # end)
-
-  # @impl true
-  # def handle_info({:error, message}, socket) do
-  #   send(self(), :schedule_clear_message)
-
-  #   {:noreply, assign(socket, error: message)}
-  # end
-
-  # @impl true
-  # def handle_info({:schedule_clear_message, :toast}, socket) do
-  #   :timer.sleep(10000)
-  #   {:noreply, assign(socket, :toast, nil)}
-  # end
 
   @impl true
   def handle_info(%{schedule_clear_message: id}, socket) do
-    IO.inspect("dddd")
-    IO.inspect(id)
 
     messages = Enum.reject(socket.assigns.flash_messages, fn x -> x.id == id end)
     {:noreply, socket |> assign(:flash_messages, messages)}
   end
 
-  @impl true
-  def handle_info(params, socket) do
-    IO.inspect(params)
-    :timer.sleep(10000)
-    {:noreply, socket}
-  end
+
 
   @impl true
   def handle_info({:schedule_clear_message, :error}, socket) do
-    :timer.sleep(5000)
     {:noreply, assign(socket, :error, nil)}
   end
 

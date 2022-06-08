@@ -9,6 +9,7 @@ defmodule NotifyappWeb.NoteLive.Index do
     {:ok, assign(socket, :notes, list_notes())}
   end
 
+
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}

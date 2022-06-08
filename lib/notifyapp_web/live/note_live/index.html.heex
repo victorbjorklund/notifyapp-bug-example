@@ -37,6 +37,10 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Note without delay", to: Routes.note_index_path(@socket, :new) %></span>
+<div class="my-4">
+<span><%= live_patch "New Note without delay", to: Routes.note_index_path(@socket, :new), class: "border border-2 border-gray-200 rounded-md px-4 py-2" %></span>
+</div>
+<div class="my-4">
+<span><%= live_patch "New Note with delay", to: Routes.note_index_path(@socket, :new_delay), class: "border border-2 border-gray-200 rounded-md px-4 py-2" %></span>
+</div>
 
-<span><%= live_patch "New Note with delay", to: Routes.note_index_path(@socket, :new_delay) %></span>

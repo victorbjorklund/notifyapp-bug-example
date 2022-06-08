@@ -15,12 +15,6 @@ defmodule NotifyappWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", NotifyappWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
-
-  end
 
   live_session :random,
   on_mount: [
@@ -29,13 +23,13 @@ defmodule NotifyappWeb.Router do
     scope "/", NotifyappWeb do
       pipe_through :browser
 
-      live "/notes", NoteLive.Index, :index
-      live "/notes/new", NoteLive.Index, :new
-      live "/notes/new-delayed", NoteLive.Index, :new_delay
-      live "/notes/:id/edit", NoteLive.Index, :edit
+      live "", NoteLive.Index, :index
+      live "/new", NoteLive.Index, :new
+      live "/new-delayed", NoteLive.Index, :new_delay
+      live "/:id/edit", NoteLive.Index, :edit
 
-      live "/notes/:id", NoteLive.Show, :show
-      live "/notes/:id/show/edit", NoteLive.Show, :edit
+      live "/:id", NoteLive.Show, :show
+      live "/:id/show/edit", NoteLive.Show, :edit
     end
   end
 
