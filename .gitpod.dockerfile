@@ -22,8 +22,3 @@ RUN sudo mix local.hex --force
 RUN sudo mix local.rebar --force
 
 USER gitpod
-
-RUN curl -L https://fly.io/install.sh | sh
-
-ENV FLYCTL_INSTALL="/home/gitpod/.fly"
-ENV PATH="$FLYCTL_INSTALL/bin:$PATH"
