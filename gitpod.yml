@@ -1,0 +1,41 @@
+image:
+  file: .gitpod.dockerfile
+
+# List the ports you want to expose and what to do when they are served. See https://www.gitpod.io/docs/43_config_ports/
+ports:
+  - port: 4000
+    visibility: public
+  - port: 5432
+    visibility: public
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/44_config_start_tasks/
+tasks:
+  # Install front-end assets
+  - before: mix local.hex --force && mix local.rebar --force && mix deps.get --force && mix compile
+    init: psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';" && cd /workspace/notifyapp/assets && npm install && cd /workspace/notifyapp && mix ecto.create
+    command: mix ecto.migrate && iex -S mix phx.server
+
+github:
+  prebuilds:
+    # enable for the master/default branch (defaults to true)
+    master: true
+    # enable for all branches in this repo (defaults to false)
+    branches: true
+    # enable for pull requests coming from this repo (defaults to true)
+    pullRequests: true
+    # enable for pull requests coming from forks (defaults to false)
+    pullRequestsFromForks: true
+    # add a check to pull requests (defaults to true)
+    addCheck: true
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    addComment: true
+    # add a "Review in Gitpod" button to the pull request's description (defaults to false)
+    addBadge: false
+    # add a label once the prebuild is ready to pull requests (defaults to false)
+    addLabel: false
+vscode:
+  extensions:
+    - devkir.elixir-syntax-vscode
+    - royalmist.vscode-eex-format
+    - jakebecker.elixir-ls
+    - victorbjorklund.phoenix
+    - esbenp.prettier-vscode
