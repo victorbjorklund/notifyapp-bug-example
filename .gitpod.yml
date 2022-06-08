@@ -11,7 +11,7 @@ ports:
 tasks:
   # Install front-end assets
   - before: mix local.hex --force && mix local.rebar --force && mix deps.get --force && mix compile
-    init: psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';" && cd /workspace/notifyapp/assets && npm install && cd /workspace/notifyapp && mix ecto.create
+    init: psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';" && cd /workspace/notifyapp-bug-example/assets && npm install && cd /workspace/notifyapp-bug-example && mix ecto.create
     command: mix ecto.migrate && iex -S mix phx.server
 
 github:
